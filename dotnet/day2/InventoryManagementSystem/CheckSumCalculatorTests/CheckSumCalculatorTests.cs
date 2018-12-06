@@ -2,7 +2,7 @@ using Xunit;
 
 namespace CheckSumCalculatorTests
 {
-    public class UnitTest1
+    public class CheckSumCalculatorTests
     {
         private readonly string[] _boxIds = new string[]
         {
@@ -13,6 +13,17 @@ namespace CheckSumCalculatorTests
             "aabcdd",
             "abcdee",
             "ababab"
+        };
+
+        private readonly string[] _boxIdsMatched = new string[]
+        {
+            "abcde",
+            "fghij",
+            "klmno",
+            "pqrst",
+            "fguij",
+            "axcye",
+            "wvxyz"
         };
 
         [Fact]
@@ -44,6 +55,23 @@ namespace CheckSumCalculatorTests
             var checkSumCalculator = new CheckSumCalculator.CheckSumCalculator();
             var result = checkSumCalculator.Checksum(boxIds);
             Assert.Equal(7105, result);
+        }
+
+        [Fact]
+        public void TestBoxesWithFabric()
+        {
+            var checkSumCalculator = new CheckSumCalculator.CheckSumCalculator();
+            var result = checkSumCalculator.BoxesWithPrototypeFabric(_boxIdsMatched);
+            Assert.Equal("fgij", result);
+        }
+
+        [Fact]
+        public void RealBoxesWithFabric()
+        {
+            var boxIds = System.IO.File.ReadAllLines(@"C:\projects\AdventOfCode2018\dotnet\day2\puzzleinput.txt");
+            var checkSumCalculator = new CheckSumCalculator.CheckSumCalculator();
+            var result = checkSumCalculator.BoxesWithPrototypeFabric(boxIds);
+            Assert.Equal("omlvgdokxfncvqyersasjziup", result);
         }
     }
 }

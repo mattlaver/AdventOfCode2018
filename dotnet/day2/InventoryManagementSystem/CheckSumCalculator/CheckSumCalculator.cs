@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 
 namespace CheckSumCalculator
 {
@@ -27,6 +26,37 @@ namespace CheckSumCalculator
             }
 
             return twoCount * threeCount;
+        }
+
+        public string BoxesWithPrototypeFabric(string[] boxIds)
+        {              
+            foreach (var box1 in boxIds)
+            {
+                foreach (var box2 in boxIds)
+                {
+                    var position = 0;
+                    var diffCount = 0;
+                    var diffPosition = 0;
+
+                    foreach (var character in box1)
+                    {
+                        if (box2[position] != character)
+                        {
+                            diffCount++;
+                            diffPosition = position;
+                        }
+
+                        position++;
+                    }
+
+                    if (diffCount == 1)
+                    {
+                        return box2.Remove(diffPosition, 1);
+                    }                    
+                }
+            }
+
+            throw new Exception("Oh No, we can't find the box!");
         }
     }
 }
