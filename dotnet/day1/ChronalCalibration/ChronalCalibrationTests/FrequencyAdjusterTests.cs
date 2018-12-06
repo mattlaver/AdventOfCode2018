@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using ChronalCalibration;
 
@@ -28,7 +27,16 @@ namespace ChronalCalibrationTests
             var offsets = System.IO.File.ReadAllLines(@"C:\projects\AdventOfCode2018\dotnet\day1\puzzleinput.txt");
             var frequencyAdjuster = new FrequencyAdjuster();
             var result = frequencyAdjuster.CalculatedFrequency(offsets);
-            Console.WriteLine(result);
+            Assert.Equal(578, result);
+        }
+
+        [Fact]
+        public void FindDuplicates()
+        {
+            var offsets = System.IO.File.ReadAllLines(@"C:\projects\AdventOfCode2018\dotnet\day1\puzzleinput.txt");
+            var frequencyAdjuster = new FrequencyAdjuster();
+            var result = frequencyAdjuster.FindFirstDuplicate(offsets);
+            Assert.Equal(82793, result);
         }
     }
 }
